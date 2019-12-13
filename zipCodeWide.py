@@ -14,20 +14,21 @@ try:
     conn_string = 'mongodb+srv://dlevi326:326%40Barr@cluster0-owylp.mongodb.net/test?retryWrites=true&w=majority'
     myclient = pymongo.MongoClient(conn_string)
     mydb = myclient["RealEstate"]
-    mycol = mydb["CountyWide"]
+    mycol = mydb["ZipCodeWide"]
 except Exception as e:
     print(e)
 
 stateId = 'ST36' # New York
+geoType = 'ZI' # Zip code
 
 
 
-def get_counties():
+def get_zip_codes():
 
     mydb = myclient['RealEstate']
-    mycol = mydb['CountyWide']
+    mycol = mydb['ZipCodeWide']
 
-    query_string = 'https://api.gateway.attomdata.com/areaapi/v2.0.0/county/lookup?StateId='+stateId
+    query_string = 'https://api.gateway.attomdata.com/areaapi/v2.0.0/geoid/lookup/?geoId='+stateId+'&GeoType='+geoType
     conn.request("GET", query_string, headers=headers) 
     res = conn.getresponse() 
     data = res.read() 
@@ -38,4 +39,5 @@ def get_counties():
 
 
 if __name__ == '__main__':
-    get_counties()
+    get_zip_codes()
+    print('done')

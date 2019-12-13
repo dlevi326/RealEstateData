@@ -39,4 +39,5 @@ def get_states():
         print(res)
 
 if __name__ == '__main__':
-    get_states()
+    #get_states()
+    print('done')
